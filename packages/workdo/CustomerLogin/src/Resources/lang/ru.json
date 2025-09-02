@@ -1,0 +1,23 @@
+{
+    "Already have an account? ": "Уже есть аккаунт? ",
+    "Confirm Password": "Подтвердите пароль",
+    "Conversation": "Беседа",
+    "Create Ticket": "Создать билет",
+    "Email": "Электронная почта",
+    "Enter Confirm Password": "Введите подтверждение пароля",
+    "Enter Email address": "Введите адрес электронной почты",
+    "Enter Password": "Введите пароль",
+    "Enter Username": "Введите имя пользователя",
+    "FAQ": "Часто задаваемые вопросы",
+    "Full Name": "Полное имя",
+    "Knowledge": "Знание",
+    "Login": "Авторизоваться",
+    "Logout": "Выход",
+    "Password": "Пароль",
+    "Profile": "Профиль",
+    "Register": "Зарегистрировать",
+    "Registration successfully!": "Регистрация успешно!",
+    "Search Ticket": "Поиск билета",
+    "Ticket created successfully": "Билет создан успешно",
+    "Your unique ticket link is this.": "Ваша уникальная ссылка на билет это."
+  }

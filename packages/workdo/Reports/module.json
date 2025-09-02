@@ -1,0 +1,8 @@
+{
+    "name": "Reports",
+    "alias": "Reports",
+    "description": "",
+    "priority": 710,
+    "version":1.0,
+    "package_name":"reports"
+}
