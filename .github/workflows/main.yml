@@ -30,4 +30,4 @@ jobs:
           cd domains/helpdesk.zimam.sa/public_html
           git pull origin main
           php artisan migrate --force
-          php artisan optimize💯
+          php artisan optimize
