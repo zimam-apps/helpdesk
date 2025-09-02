@@ -11,7 +11,7 @@
     "FAQ": "التعليمات",
     "Full Name": "الاسم الكامل",
     "Knowledge": "معرفة",
-    "Login": "تسجيل الدخول",
+    "Login": "تسجيل الدخول", 
     "Logout": "تسجيل الخروج",
     "Password": "كلمة المرور",
     "Profile": "حساب تعريفي",
@@ -19,5 +19,6 @@
     "Registration successfully!": "التسجيل بنجاح!",
     "Search Ticket": "تذكرة البحث",
     "Ticket created successfully": "تم إنشاؤه بنجاح",
+    "Customer Register": "انشاء حساب جديد ",
     "Your unique ticket link is this.": "رابط التذاكر الفريد الخاص بك هو هذا."
   }
