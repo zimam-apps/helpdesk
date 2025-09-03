@@ -10,6 +10,7 @@
                        alt="{{ config('app.name', 'TicketGo SaaS') }}" class="logo logo-sm">
                </a>
            </div>
+           
            <div class="navbar-content">
                <ul class="dash-navbar">
                    {!! getMenu() !!}

@@ -56,7 +56,7 @@
         </div>
     </div>
 
-</header>
+</header> 
 
 {{-- <div class="mobile-menu-wrapper">
     <div class="close-menu mb-3">

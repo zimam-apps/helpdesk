@@ -114,8 +114,8 @@
         </div>
     </div>
 
-    @include('admin.partials.sidebar')
-
+    @include('admin.partials.sidebar') 
+ 
 
     @include('admin.partials.topnav')
 

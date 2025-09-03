@@ -53,7 +53,19 @@
                 </li>
             </ul>
         </div>
-        <ul class="list-unstyled mb-0">
+        <div class="text-center ticket-btn-wrapper pt-3">
+
+            
+                                    <div class="d-block ">
+                                        <button class="btn btn-primary login-do-btn"
+                                        onclick="location.href='{{ route('create.ticket') }}'" type="button"
+                                            id="login_button">{{ __('Create Ticket') }}</button>
+                                    </div>
+                                </div>
+
+
+        
+        {{-- <ul class="list-unstyled mb-0">
             <li class="dropdown dash-h-item drp-language">
                 <a class="dash-head-link dropdown-toggle arrow-none me-0" data-bs-toggle="dropdown" href="#"
                     role="button" aria-haspopup="false" aria-expanded="false">
@@ -86,6 +98,6 @@
                     </div>
                 </div>
             </li>
-        </ul>
+        </ul> --}}
     </div>
 </header>
