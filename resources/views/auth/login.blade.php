@@ -980,14 +980,14 @@
                                             id="login_button">{{ __('Login') }}</button>
                                     </div>
                                 </div>
-                                @if (moduleIsActive('CustomerLogin'))
+                                {{-- @if (moduleIsActive('CustomerLogin'))
 
                                     <p class="my-4 text-center">{{ __('Don') }}'{{ __('t have an account? ') }}<a
                                             href="{{ route('register', $lang) }}"
                                             tabindex="0">{{ __('Customer Registration') }}</a>
                                     </p>
 
-                                @endif
+                                @endif --}}
                             </form>
                         </div>
                     </div>

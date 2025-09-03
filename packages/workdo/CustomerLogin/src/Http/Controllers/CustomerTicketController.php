@@ -30,7 +30,7 @@ class CustomerTicketController extends Controller
         $categoryTree = buildCategoryTree($categories);
         $priorities = Priority::get();
 
-        $settings      = getCompanyAllSettings();
+        $settings      = getCompanyAllSettings(); 
         if ($lang == '') {
             $lang = getActiveLanguage();
         } else {
@@ -39,7 +39,9 @@ class CustomerTicketController extends Controller
         $language = Languages::where('code',$lang)->first();
         App::setLocale($lang);
         $ticket = null;
-        return view('customer-login::ticket.create', compact('categoryTree', 'customFields', 'settings', 'priorities', 'ticket','language','lang'));
+        $user = Auth::check() ? Auth::user() : null; // <--- إضافة المتغير $user
+
+        return view('customer-login::ticket.create', compact('categoryTree', 'customFields', 'settings', 'priorities', 'ticket','language','lang','user'));
     }
 
     public function create()

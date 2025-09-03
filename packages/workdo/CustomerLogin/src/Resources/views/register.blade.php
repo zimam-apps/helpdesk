@@ -882,6 +882,113 @@
 
             </div>
             <div class="col-lg-6 col-12">
+                    <div class="login-form-wrp">
+                        <h2 class="mb-4 text-center">{{ __('Login') }}</h2>
+                        @if (session()->has('create_user'))
+                            <div class="alert alert-success w-100 mx-auto">
+                                <span> {{ session()->get('create_user') }}</span>
+                            </div>
+                        @endif
+                        @if (session('error'))
+                            <div class="alert alert-danger w-100 mx-auto">
+                                <span> {{ session('error') }}</span>
+                            </div>
+                        @endif
+                        @if (session()->has('info'))
+                            <div class="alert alert-success w-100 mx-auto">
+                                <span> {{ session()->get('info') }}</span>
+                            </div>
+                        @endif
+                        @if (session()->has('status'))
+                            <div class="alert alert-info w-100 mx-auto">
+                                <span> {{ session()->get('status') }}</span>
+                            </div>
+                        @endif
+                        <div class="login-form">
+
+                            <form method="POST" class="needs-validation create-form" novalidate
+                                action="{{ route('login') }}" id="form_data">
+                                @csrf
+                                <div class="row">
+                                    <div class="form-group mb-3 col-12">
+                                        <label for="email" class="form-label d-flex">{{ __('Email') }}</label>
+                                        <input type="email"
+                                            class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}" id="email"
+                                            name="email" placeholder="{{ __('Enter your email') }}" required=""
+                                            value="{{ old('email') }}">
+                                        <div class="invalid-feedback d-block">
+                                            {{ $errors->first('email') }}
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group mb-3 col-12">
+                                        <label class="form-label d-flex">{{ __('Password') }}</label>
+                                        <input type="password"
+                                            class="form-control {{ $errors->has('password') ? ' is-invalid' : '' }}"
+                                            id="password" name="password" placeholder="{{ __('Enter Password') }}"
+                                            required="" value="{{ old('password') }}">
+                                        <div class="invalid-feedback d-block">
+                                            {{ $errors->first('password') }}
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-12">
+                                        <div class="d-flex flex-wrap align-items-center justify-content-between">
+
+                                            <span><a href="{{ route('password.request', $lang) }}"
+                                                    tabindex="0">{{ __('Forgot your password?') }}</a></span>
+                                        </div>
+                                    </div>
+
+                                    @if (isset($settings['RECAPTCHA_MODULE']) && $settings['RECAPTCHA_MODULE'] == 'yes')
+                                                                    @if (
+                                                                        isset($settings['google_recaptcha_version']) &&
+                                                                        $settings['google_recaptcha_version'] == 'v2-checkbox'
+                                                                    )
+                                                                                                    <div class="form-group mb-4">
+                                                                                                        {!! NoCaptcha::display() !!}
+                                                                                                        @error('g-recaptcha-response')
+                                                                                                            <span class="small text-danger" role="alert">
+                                                                                                                <strong>{{ $message }}</strong>
+                                                                                                            </span>
+                                                                                                        @enderror
+                                                                                                    </div>
+                                                                    @else
+                                                                        <div class="form-group mb-4">
+                                                                            <input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response"
+                                                                                class="form-control">
+                                                                            @error('g-recaptcha-response')
+                                                                                <span class="error small text-danger" role="alert">
+                                                                                    <strong>{{ $message }}</strong>
+                                                                                </span>
+                                                                            @enderror
+                                                                        </div>
+                                                                    @endif
+                                    @endif
+                                </div> 
+                                
+                                <div class="text-center ticket-btn-wrapper pt-3">
+                                    <div class="d-block ">
+                                        <button class="btn btn-primary login-do-btn"
+                                            id="login_button">{{ __('Login') }}</button>
+                                    </div>
+                                </div>
+
+                                {{-- @if (moduleIsActive('CustomerLogin'))
+
+                                    <p class="my-4 text-center">{{ __('Don') }}'{{ __('t have an account? ') }}<a
+                                            href="{{ route('register', $lang) }}"
+                                            tabindex="0">{{ __('Customer Registration') }}</a>
+                                    </p>
+
+                                @endif --}}
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            
+            {{-- <div class="col-lg-6 col-12">
                 <div class="login-form-wrp">
                     <h2 class="mb-4 text-center">{{ __('Customer Register') }}</h2>
                     @if (Session::has('create_user'))
@@ -983,7 +1090,7 @@
                         </form>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
 
         @include('layouts.footer')

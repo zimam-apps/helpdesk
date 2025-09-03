@@ -6,11 +6,11 @@
                     <label for="name" class="form-label">{{ __($customField->name) }}</label>
                     @if ($customField->is_required == 1)
                         <x-required></x-required>
-                    @endif
+                    @endif 
                     <div class="form-icon-user">
                         <input type="text" class="form-control {{ $errors->has('name') ? ' is-invalid' : '' }}"
                             id="name" name="name" placeholder="{{ __($customField->placeholder) }}" required=""
-                            value="{{ old('name') }}">
+                            value="{{ $user->name }}">
                         <div class="invalid-feedback d-block">
                             {{ $errors->first('name') }}
                         </div>
@@ -18,23 +18,29 @@
                 </div>
             </div>
         @elseif($customField->custom_id == '2')
+            
+
             <div class="col-lg-{{ $customField->width }}">
                 <div class="form-group mb-3 {{ $customField->width }}">
                     <label for="email" class="form-label">{{ __($customField->name) }}</label>
                     @if ($customField->is_required == 1)
-                        <x-required></x-required>
+                        <x-required></x-required> 
                     @endif
                     <div class="form-icon-user">
-                        <input type="email" class="form-control {{ $errors->has('email') ? ' is-invalid' : '' }}"
+                        <input type="email" class="form-control {{ $errors->has('email') ? ' is-invalid' : '' }} "
                             id="email" name="email" placeholder="{{ __($customField->placeholder) }}"
-                            required="" value="{{ old('email') }}">
+                            required="" value="{{  $user->email }}">
                         <div class="invalid-feedback d-block">
                             {{ $errors->first('email') }}
                         </div>
                     </div>
                 </div>
             </div>
-        @elseif($customField->custom_id == '3')
+
+
+    
+    
+            @elseif($customField->custom_id == '3')
             <div class="col-lg-{{ $customField->width }}">
                 <div class="form-group mb-3 {{ $customField->width }}">
                     <label for="subject" class="form-label">{{ __($customField->name) }}</label>
@@ -51,7 +57,9 @@
                     </div>
                 </div>
             </div>
-        @elseif($customField->custom_id == '4')
+    
+    
+            @elseif($customField->custom_id == '4')
             <div class="col-lg-{{ $customField->width }}">
                 <div class="form-group mb-3 {{ $customField->width }}">
                     <label for="category" class="form-label">{{ __($customField->name) }}</label>
@@ -123,9 +131,9 @@
                                 <div class="mb-2">{{ __('Choose File Here') }}</div>
                                 <div class="file-upload">
                                     <div class="file-select">
-                                        <div class="file-select-button btn btn-primary btn-block" id="fileName">Choose File
+                                        <div class="file-select-button btn btn-primary btn-block" id="fileName">ارفاق الملف
                                         </div>
-                                        <div class="file-select-name" id="noFile">No file chosen...</div>
+                                        <div class="file-select-name" id="noFile">اختر ملف</div>
                                         <input type="file"
                                             class="form-control {{ $errors->has('attachments.') ? 'is-invalid' : '' }}"
                                             multiple="" name="attachments[]" id="chooseFile"
@@ -398,7 +406,7 @@
         var filename = $("#chooseFile").val();
         if (/^\s*$/.test(filename)) {
             $(".file-upload").removeClass('active');
-            $("#noFile").text("No file chosen...");
+            $("#noFile").text("اختار ملف");
         } else {
             $(".file-upload").addClass('active');
             $("#noFile").text(filename.replace("C:\\fakepath\\", ""));

@@ -33,6 +33,7 @@ class CustomerLoginController extends Controller
         $language = Languages::where('code',$lang)->first();
         $settings = getCompanyAllSettings();
         App::setLocale($lang);
+        
 
         return view('customer-login::register', compact('lang', 'settings','language'));
     }

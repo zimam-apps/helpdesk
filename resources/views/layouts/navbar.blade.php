@@ -27,12 +27,12 @@
 
     <div class="logo-col">
         <a class="d-block" href="{{ route('home') }}">
-            <img src="{{ getFile(getSidebarLogo()) }}{{ '?' . time() }}" alt="logo">
+            <img src="{{ getFile(getSidebarLogo()) }}{{ '?' . time() }}" alt="Zimam">
         </a>
     </div>
 
     <div class="right-nav d-flex gap-3 align-items-center justify-content-end flex-1">
-        @yield('language-bar')
+        {{-- @yield('language-bar') --}}
         <a class="login-btn" href="{{ route('login') }}">{{ __('Login') }}</a>
         <div class="mobile-menu-btn">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

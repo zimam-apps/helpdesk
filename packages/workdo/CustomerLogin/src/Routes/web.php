@@ -28,10 +28,12 @@ Route::group(['middleware' => ['web','ModuleCheckEnable:CustomerLogin']], functi
         Route::get('/create/ticket/{lang?}', [CustomerTicketController::class, 'index'])->name('create.ticket');
         Route::post('ticket', [CustomerTicketController::class, 'store'])->name('ticket.store');
     });
-   
+  
+
+ 
 
     Route::get('/register/{lang?}', [CustomerLoginController::class, 'showRegistrationForm'])->name('register');
-    Route::post('/register', [CustomerLoginController::class, 'store'])->name('register.store');
+    Route::post('/ register', [CustomerLoginController::class, 'store'])->name('register.store');
     
 });
 

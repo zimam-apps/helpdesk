@@ -162,7 +162,7 @@
             </div>
             <div class="auth-content ticket-form-wrapper">
                 {{-- Navbar --}}
-                @include('layouts.navbar')
+                @include('layouts.navbar') 
 
                 <div class="row login-row">
                     <div class="top-bg">

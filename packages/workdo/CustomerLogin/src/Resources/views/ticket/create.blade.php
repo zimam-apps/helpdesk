@@ -11,7 +11,7 @@
 @section('page-title')
     {{ __('Create Ticket') }}
 @endsection
-@section('language-bar')
+{{-- @section('language-bar')
     <div class="lang-dropdown-only-desk">
         <li class="dropdown dash-h-item drp-language">
             <a class="dash-head-link dropdown-toggle btn" href="#" data-bs-toggle="dropdown" aria-expanded="false">
@@ -28,7 +28,7 @@
             </div>
         </li>
     </div>
-@endsection
+@endsection --}}
 @push('css-page')
     <link rel="stylesheet" href="{{ asset('css/summernote/summernote-bs4.css') }}">
 @endpush
@@ -815,8 +815,10 @@
                             </svg>
                         </div>
                     </div>
+                    {{-- this is the ticket creation forms --}}
                     <div class="col-lg-6 col-12">
                         <div class="login-form-wrp">
+                            
                             @if (Session::has('create_ticket'))
                                 <div class="alert alert-success">
                                     <span>{!! session('create_ticket') !!}</span>
@@ -835,7 +837,7 @@
 
                                 <div class="row">
                                     @if (!$customFields->isEmpty())
-                                        @include('admin.customFields.formBuilder')
+                                        @include('admin.customFields.formBuilder' )
                                     @endif
 
                                     @if (isset($settings['RECAPTCHA_MODULE']) && $settings['RECAPTCHA_MODULE'] == 'yes')
@@ -864,6 +866,7 @@
                                                             @endif
                                     @endif
                                 </div>
+
                                 <div class="text-center ticket-btn-wrapper mt-3">
                                     <div class="d-block ">
                                         <input type="hidden" name="status" value="New Ticket" />
@@ -876,6 +879,8 @@
                             </form>
                         </div>
                     </div>
+
+
                 </div>
                 @include('layouts.footer')
             </div>

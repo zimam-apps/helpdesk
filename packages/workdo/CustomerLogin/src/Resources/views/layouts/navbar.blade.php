@@ -5,28 +5,30 @@
         <li class="nav-item">
             <a class="nav-link" href="{{ route('admin.new.chat') }}">{{ __('Conversation') }}</a>
         </li>
-        <li class="nav-item">
+        {{-- <li class="nav-item">
             <a class="nav-link" href="{{ route('search') }}">{{ __('Search Ticket') }}</a>
-        </li>
-        <li class="nav-item">
+        </li> --}}
+        {{-- <li class="nav-item">
             @if (isset($settings['faq']) && $settings['faq'] == 'on')
                 <a class="nav-link" href="{{ route('faq') }}">{{ __('FAQ') }}</a>
             @endif
-        </li>
-        <li class="nav-item">
+        </li> --}}
+        {{-- <li class="nav-item">
             @if (isset($settings['knowledge_base']) && $settings['knowledge_base'] == 'on')
                 <a class="nav-link" href="{{ route('knowledge') }}">{{ __('Knowledge') }}</a>
             @endif
-        </li>
+        </li> --}}
         <li class="nav-item">
             <a class="nav-link" href="{{ route('profile') }}">{{ __('Profile') }}</a>
         </li>
 
 
     </ul>
+
+
     <div class="logo-col">
-        <a class="d-block" href="{{ route('home') }}">
-            <img src="{{ getFile(getSidebarLogo()) }}{{ '?' . time() }}" alt="logo">
+        <a class="d-block" href="{{ route('profile') }}">
+            <img src="{{ getFile(getSidebarLogo()) }}{{ '?' . time() }}" alt="'Zimam'">
         </a>
     </div>
 
@@ -66,7 +68,7 @@
 </header>
 
 
-<div class="mobile-menu-wrapper">
+{{-- <div class="mobile-menu-wrapper">
     <div class="close-menu mb-3">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
             <path fill-rule="evenodd" clip-rule="evenodd"
@@ -98,7 +100,7 @@
 
     </ul>
 
-</div>
+</div> --}}
 
 
 <script>
