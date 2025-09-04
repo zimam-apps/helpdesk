@@ -41,7 +41,7 @@ class DefaultCompanySetting extends Seeder
       'strictly_cookie_title' => 'Strictly necessary cookies',
       'strictly_cookie_description' => 'These cookies are essential for the proper functioning of my website. Without these cookies, the website would not work properly',
       'more_information_description' => 'For any queries in relation to our policy on cookies and your choices, please contact us',
-      'footer_text' => '© 2025 TicketGo',
+      'footer_text' => '© 2025 Zimam',
       'contactus_url' => '#',
     ];
 

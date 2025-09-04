@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+
 use Illuminate\Database\Seeder;
 use App\Models\User; // غيّرها إلى Customer إذا عندك موديل خاص بالعملاء
 use App\Models\Role;

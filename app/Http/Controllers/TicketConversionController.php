@@ -265,11 +265,11 @@ class TicketConversionController extends Controller
                         if ($ticket->type != 'Mail') {
                             sendTicketEmail('Reply Mail To Customer', $settings, $ticket, $request, $error_msg);
                         }
-
+ 
                         return response()->json([
                             'converstation' => $conversion,
                             'new_message' => $conversion->description ?? '',
-                            'timestamp' => \Carbon\Carbon::parse($conversion->created_at)->format('l h:ia'),
+                            'timestamp' => \Carbon\Carbon::parse($conversion->created_at) ->timezone('Asia/Riyadh') ->format('l h:ia'),
                             'sender_name' => $conversion->replyBy()->name,
                             'attachments' => json_decode($conversion->attachments),
                             'baseUrl' => env('APP_URL'),

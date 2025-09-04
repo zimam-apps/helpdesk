@@ -443,6 +443,7 @@
                 {{--
             </div> --}}
         </div>
+        
         <div class="chat-wrapper-right">
             <div class="chat-header">
                 <div class="chat-header-inner">
@@ -540,7 +541,8 @@
                     </div>
                 </div>
             </div>
-            <div class="chat-right-body flex-column" id="messages">
+            <div class="chat-right-body flex-column" id="messages"> //TODO: add ID for JS
+                {{-- chat messages --}}
                 <!--renderhtml-->
             </div>
         </div>
