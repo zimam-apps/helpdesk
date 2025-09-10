@@ -145,8 +145,10 @@ class CustomerTicketController extends Controller
 
             //Send Email To The Admin
             sendTicketEmail('Send Mail To Admin', $settings, $ticket, $request, $error_msg);
+            // return redirect()->back()->with('create_ticket', __('Ticket created successfully') . ' <a href="' . route('home.view', Crypt::encrypt($ticket->ticket_id)) . '" target="_blank"><b>' . __('Your unique ticket link is this.') . '</b></a> ' . ((isset($error_msg)) ? '<br> <span class="text-danger">' . $error_msg . '</span>' : ''));
 
-            return redirect()->back()->with($this->notification('تذكرتك جاهزة للمعالجة، وراح نتواصل معك للمعالجة في أسرع وقت.','success'));
+
+            return redirect()->back()->with($this->notification('تذكرتك رقم '.$ticket->ticket_id.'# جاهزة للمعالجة، وراح نتواصل معك للمعالجة في أسرع وقت.','success'));
 
             CustomField::saveData($ticket, $request->customField);
 

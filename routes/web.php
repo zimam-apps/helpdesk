@@ -1,35 +1,36 @@
 <?php
 
-use App\Http\Controllers\AddOnController;
-use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\LanguageController;
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\FaqController;
+use Illuminate\Support\Facades\Artisan;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MetaController;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\AddOnController;
 use App\Http\Controllers\TicketController;
-use App\Http\Controllers\KnowledgeController;
-use App\Http\Controllers\KnowledgebaseCategoryController;
-use App\Http\Controllers\EmailTemplateController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\PriorityController;
-use App\Http\Controllers\NotificationTemplatesController;
+use App\Http\Controllers\SettingsController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\KnowledgeController;
 use App\Http\Controllers\AiTemplateController;
 use App\Http\Controllers\CustomFieldController;
-use App\Http\Controllers\GoogleAuthenticationController;
-use App\Http\Controllers\RoleController;
+use App\Http\Controllers\EmailTemplateController;
 use App\Http\Controllers\TicketConversionController;
+use App\Http\Controllers\GoogleAuthenticationController;
+use App\Http\Controllers\KnowledgebaseCategoryController;
+use App\Http\Controllers\NotificationTemplatesController;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
-use App\Http\Controllers\MetaController;
 
 require __DIR__ . '/auth.php';
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::any('/cookie-consent', [SettingsController::class, 'CookieConsent'])->name('cookie-consent');
 
 Route::controller(HomeController::class)->group(function () {
-    Route::get('/', [HomeController::class, 'index'])->name('home');
+    // Route::get('/', [HomeController::class, 'index'])->name('home');
     Route::post('home', 'store')->name('home.store');
     Route::get('search/{lang?}', 'search')->name('search');
     Route::post('search', 'ticketSearch')->name('ticket.search');

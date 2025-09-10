@@ -2,37 +2,37 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\CreateTicket;
-use App\Events\CreateTicketFrontend;
-use App\Events\TicketReply;
-use App\Events\VerifyReCaptchaToken;
-use App\Models\Category;
-use App\Models\Conversion;
-use App\Models\CustomField;
+use Exception;
+use Pusher\Pusher;
 use App\Models\Faq;
+use App\Models\User;
+use App\Models\Ticket;
+use App\Models\Utility;
 use App\Mail\SendTicket;
+use App\Models\Category;
+use App\Models\Priority;
+use App\Models\Settings;
+use App\Models\Knowledge;
+use App\Models\Languages;
+use App\Models\Conversion;
+use App\Events\TicketReply;
+use App\Models\CustomField;
+use App\Models\SubCategory;
 use App\Models\UserCatgory;
+use App\Events\CreateTicket;
+use Illuminate\Http\Request;
 use App\Mail\SendTicketAdmin;
 use App\Mail\SendTicketReply;
-use App\Models\Ticket;
-use App\Models\User;
-use App\Models\Knowledge;
-use App\Models\Knowledgebasecategory;
-use App\Models\Languages;
-use App\Models\Utility;
-use App\Models\Settings;
-use App\Models\Priority;
-use App\Models\SubCategory;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
+use App\Events\CreateTicketFrontend;
+use App\Events\VerifyReCaptchaToken;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Storage;
+use App\Models\Knowledgebasecategory;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
-use Pusher\Pusher;
-use Exception;
 
 class HomeController extends Controller
 {
@@ -41,24 +41,47 @@ class HomeController extends Controller
     {
         // $this->middleware('2fa');
 
-        if (!file_exists(storage_path() . "/installed")) {
-            return redirect('install');
-        }
-        if (moduleIsActive('CustomerLogin')) {
-            $this->middleware('CustomerLogin')->only(['index']);
-        }
+        // if (!file_exists(storage_path() . "/installed")) {
+        //     return redirect('install');
+        // }
+        // if (moduleIsActive('CustomerLogin')) {
+        //     $this->middleware('CustomerLogin')->only(['index']);
+        // }
 
         $language = getActiveLanguage();
         App::setLocale(isset($language) ? $language : 'en');
     }
-    public function index()
+
+       public function index($lang = '')
+    {
+        $customFields = CustomField::orderBy('order')->get();
+        $categories   = Category::get();
+        $categoryTree = buildCategoryTree($categories);
+        $priorities = Priority::get();
+
+        $settings      = getCompanyAllSettings();
+        if ($lang == '') {
+            $lang = getActiveLanguage();
+        } else {
+            $lang = array_key_exists($lang, languages()) ? $lang : 'en';
+        }
+        $language = Languages::where('code', $lang)->first();
+        App::setLocale($lang);
+        $ticket = null;
+        $user = Auth::check() ? Auth::user() : null; // <--- إضافة المتغير $user
+
+        return view('customer-login::ticket.create', compact('categoryTree', 'customFields', 'settings', 'priorities', 'ticket', 'language', 'lang', 'user'));
+    }
+    public function index2()
     {
 
-        $this->middleware('2fa');
+return view('customer-login::create');
 
-        if (!file_exists(storage_path() . "/installed")) {
-            return redirect('install');
-        }
+        // $this->middleware('2fa');
+
+        // if (!file_exists(storage_path() . "/installed")) {
+        //     return redirect('install');
+        // }
 
         $customFields = CustomField::orderBy('order')->get();
         $categories = Category::get();
