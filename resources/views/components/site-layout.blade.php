@@ -27,12 +27,12 @@
     <meta name="keywords" content="" />
     <meta name="author" content="" />
     <meta name="copyright" content=" " />
-    <link rel="stylesheet" href="{{asset('assets1/css/tempus-dominus.min.css')}}" />
-    <link rel="stylesheet" href="{{asset('assets1/css/fontawesome.min.css')}}" />
-    <link rel="stylesheet" href="{{asset('assets1/css/bootstrap-select.min.css')}}" />
-    <link rel="stylesheet" href="{{asset('assets1/css/swiper.min.css')}}" />
-    <link rel="stylesheet" href="{{asset('assets1/css/bootstrap.rtl.min.css')}}" />
-    <link rel="stylesheet" href="{{asset('assets1/css/toastr.min.css')}}"/>
+    <link rel="stylesheet" href="{{asset('css/assets1/css/tempus-dominus.min.css')}}" />
+    <link rel="stylesheet" href="{{asset('css/assets1/css/fontawesome.min.css')}}" />
+    <link rel="stylesheet" href="{{asset('css/assets1/css/bootstrap-select.min.css')}}" />
+    <link rel="stylesheet" href="{{asset('css/assets1/css/swiper.min.css')}}" />
+    <link rel="stylesheet" href="{{asset('css/assets1/css/bootstrap.rtl.min.css')}}" />
+    <link rel="stylesheet" href="{{asset('css/assets1/css/toastr.min.css')}}"/>
     <!-- <link rel="stylesheet" type="text/css" href="assets1/css/bootstrap.min.css"> -->
     <link rel="stylesheet" href="{{asset('assets1/css/main.css')}}" />
     @yield('styles')
@@ -56,14 +56,14 @@
       <!-- end:: footer -->
     </div>
     <!-- end:: Page -->
-    <script src="{{asset('assets1/js/query.min.js')}}"></script>
-    <script src="{{asset('assets1/js/popper.min.js')}}"></script>
-    <script src="{{asset('assets1/js/bootstrap.bundle.min.js')}}"></script>
-    <script src="{{asset('assets1/js/swiper.min.js')}}"></script>
-    <script src="{{asset('assets1/js/toastr.min.js')}}"></script>
-    <script src="{{asset('assets1/js/bootstrap-select.min.js')}}"></script>
-    <script src="{{asset('assets1/js/tempus-dominus.min.js')}}"></script>
-    <script src="{{asset('assets1/js/main.js?v=1')}}"></script>
+    <script src="{{asset('css/assets1/js/query.min.js')}}"></script>
+    <script src="{{asset('css/assets1/js/popper.min.js')}}"></script>
+    <script src="{{asset('css/assets1/js/bootstrap.bundle.min.js')}}"></script>
+    <script src="{{asset('css/assets1/js/swiper.min.js')}}"></script>
+    <script src="{{asset('css/assets1/js/toastr.min.js')}}"></script>
+    <script src="{{asset('css/assets1/js/bootstrap-select.min.js')}}"></script>
+    <script src="{{asset('css/assets1/js/tempus-dominus.min.js')}}"></script>
+    <script src="{{asset('css/assets1/js/main.js?v=1')}}"></script>
     @yield('scripts')
 
     <script>
