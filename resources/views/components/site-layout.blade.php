@@ -34,7 +34,7 @@
     <link rel="stylesheet" href="{{asset('css/assets1/css/bootstrap.rtl.min.css')}}" />
     <link rel="stylesheet" href="{{asset('css/assets1/css/toastr.min.css')}}"/>
     <!-- <link rel="stylesheet" type="text/css" href="assets1/css/bootstrap.min.css"> -->
-    <link rel="stylesheet" href="{{asset('assets1/css/main.css')}}" />
+    <link rel="stylesheet" href="{{asset('css/assets1/css/main.css')}}" />
     @yield('styles')
   </head>
   <body>
@@ -42,7 +42,7 @@
     <div class="page">
 
       <div id="preloader" class="preloader">
-        <img width="500" height="600" loading="lazy" class="preloader__img" src="{{asset('assets1/images/loader.gif')}}" alt="">
+        <img width="500" height="600" loading="lazy" class="preloader__img" src="{{asset('css/assets1/images/loader.gif')}}" alt="">
       </div>
 
       <!-- begin:: Header -->
