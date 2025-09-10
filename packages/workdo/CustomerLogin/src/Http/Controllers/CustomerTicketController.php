@@ -2,27 +2,30 @@
 
 namespace Workdo\CustomerLogin\Http\Controllers;
 
-use App\Events\CreateTicket;
-use App\Models\Category;
-use App\Models\CustomField;
-use App\Models\Priority;
+use Pusher\Pusher;
+use App\Models\User;
 use App\Models\Ticket;
-use Illuminate\Contracts\Support\Renderable;
+use App\Models\Category;
+use App\Models\Priority;
+use App\Models\Languages;
+use App\Models\CustomField;
+use App\Traits\HelperClass;
+use App\Events\CreateTicket;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Crypt;
-use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Session;
 use App\Events\VerifyReCaptchaToken;
-use App\Models\Languages;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
-
-use Pusher\Pusher;
+use Illuminate\Contracts\Support\Renderable;
 
 class CustomerTicketController extends Controller
 {
+
+    use HelperClass;
     public function index($lang = '')
     {
         $customFields = CustomField::orderBy('order')->get();
@@ -30,18 +33,18 @@ class CustomerTicketController extends Controller
         $categoryTree = buildCategoryTree($categories);
         $priorities = Priority::get();
 
-        $settings      = getCompanyAllSettings(); 
+        $settings      = getCompanyAllSettings();
         if ($lang == '') {
             $lang = getActiveLanguage();
         } else {
             $lang = array_key_exists($lang, languages()) ? $lang : 'en';
         }
-        $language = Languages::where('code',$lang)->first();
+        $language = Languages::where('code', $lang)->first();
         App::setLocale($lang);
         $ticket = null;
         $user = Auth::check() ? Auth::user() : null; // <--- إضافة المتغير $user
 
-        return view('customer-login::ticket.create', compact('categoryTree', 'customFields', 'settings', 'priorities', 'ticket','language','lang','user'));
+        return view('customer-login::ticket.create', compact('categoryTree', 'customFields', 'settings', 'priorities', 'ticket', 'language', 'lang', 'user'));
     }
 
     public function create()
@@ -51,42 +54,54 @@ class CustomerTicketController extends Controller
 
     public function store(Request $request)
     {
+
+        // dd($request->all());
         $settings = getCompanyAllSettings();
         if ($request->type == 'Ticket') {
             $validation = [
                 'name' => 'required',
-                'email' => 'required|email',
+                // 'email' => 'required|email',
                 'category' => 'required',
                 'subject' => 'required',
                 'status' => 'required',
                 'description' => 'required',
                 'priority' => 'required',
+                'user_id' => 'required',
             ];
 
-            $validation = [];
-            if (isset($settings['RECAPTCHA_MODULE']) && $settings['RECAPTCHA_MODULE'] == 'yes') {
-                if ($settings['google_recaptcha_version'] == 'v2-checkbox') {
-                    $validation['g-recaptcha-response'] = 'required';
-                } elseif ($settings['google_recaptcha_version'] == 'v3') {
-
-
-                    $re = event(new VerifyReCaptchaToken($request));
-                    if (!isset($re[0]['status']) || $re[0]['status'] != true) {
-                        $key = 'g-recaptcha-response';
-                        $request->merge([$key => null]); // Set the key to null
-
-                        $validation['g-recaptcha-response'] = 'required';
-                    }
-                } else {
-                    $validation = [];
-                }
+            $user = User::where('id', $request->user_id)->first();
+            if ($user) {
+                $request->merge(['email' => $user->email, 'name' => $user->name, 'mobile_no' => $user->mobile_no]);
             } else {
-                $validation = [];
+                return redirect()->back()->with('error', __('This user does not exist.'));
             }
+
+            // dd($request->all());
+
+            $validation = [];
+            // if (isset($settings['RECAPTCHA_MODULE']) && $settings['RECAPTCHA_MODULE'] == 'yes') {
+            //     if ($settings['google_recaptcha_version'] == 'v2-checkbox') {
+            //         $validation['g-recaptcha-response'] = 'required';
+            //     } elseif ($settings['google_recaptcha_version'] == 'v3') {
+
+
+            //         $re = event(new VerifyReCaptchaToken($request));
+            //         if (!isset($re[0]['status']) || $re[0]['status'] != true) {
+            //             $key = 'g-recaptcha-response';
+            //             $request->merge([$key => null]); // Set the key to null
+
+            //             $validation['g-recaptcha-response'] = 'required';
+            //         }
+            //     } else {
+            //         $validation = [];
+            //     }
+            // } else {
+            //     $validation = [];
+            // }
 
             // ---------------------------------------------------------------------------------
 
-            $request->validate($validation); 
+            $request->validate($validation);
 
             $ticket = new Ticket();
             $ticket->ticket_id = time();
@@ -125,6 +140,13 @@ class CustomerTicketController extends Controller
 
             // pusher
             manageCreateTicketPusher($ticket);
+            // send Email To The Customer
+            sendTicketEmail('Send Mail To Customer', $settings, $ticket, $request, $error_msg);
+
+            //Send Email To The Admin
+            sendTicketEmail('Send Mail To Admin', $settings, $ticket, $request, $error_msg);
+
+            return redirect()->back()->with($this->notification('تذكرتك جاهزة للمعالجة، وراح نتواصل معك للمعالجة في أسرع وقت.','success'));
 
             CustomField::saveData($ticket, $request->customField);
 

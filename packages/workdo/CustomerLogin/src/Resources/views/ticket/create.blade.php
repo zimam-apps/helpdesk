@@ -59,7 +59,7 @@
                                         <div class="col-6">
                                             <div class="form-group">
                                                 <label class="mb-2">نوع الخدمة</label>
-                                                <select class="selectpicker form-control" id="category" name="category"
+                                                <select class="selectpicker form-control ltr" id="category" name="category"
                                                     required data-placeholder=" ">
                                                     <option value=""> </option>
                                                     @foreach ($categoryTree as $category)
@@ -122,7 +122,7 @@
                                                 <input type="file"
                                                     class="form-control {{ $errors->has('attachments.') ? 'is-invalid' : '' }}"
                                                     multiple="" name="attachments[]" id="chooseFile"
-                                                    data-filename="multiple_file_selection" required>
+                                                    data-filename="multiple_file_selection">
                                             </div>
                                         </div>
 
